@@ -61,9 +61,13 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
+	var _testData = __webpack_require__(/*! ./testData */ 189);
+	
+	var _testData2 = _interopRequireDefault(_testData);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
+	_reactDom2.default.render(_react2.default.createElement(_App2.default, { contests: _testData2.default.contests }), document.getElementById('root'));
 
 /***/ }),
 /* 1 */
@@ -22362,33 +22366,111 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = App;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Header = __webpack_require__(/*! ./Header */ 187);
+	var _Header = __webpack_require__(/*! ./Header */ 185);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
+	var _ContestPreview = __webpack_require__(/*! ./ContestPreview */ 188);
+	
+	var _ContestPreview2 = _interopRequireDefault(_ContestPreview);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function App() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'App' },
-	    _react2.default.createElement(_Header2.default, { message: 'Naming Contests' }),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      '...'
-	    )
-	  );
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var App = function (_React$Component) {
+	  _inherits(App, _React$Component);
+	
+	  function App() {
+	    var _ref;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, App);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      test: 'Naming Contests'
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(App, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'App' },
+	        _react2.default.createElement(_Header2.default, { message: this.state.test }),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          this.props.contests.map(function (contest) {
+	            return _react2.default.createElement(_ContestPreview2.default, contest);
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return App;
+	}(_react2.default.Component);
+	
+	exports.default = App;
 
 /***/ }),
 /* 185 */
+/*!**********************************!*\
+  !*** ./src/components/Header.js ***!
+  \**********************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = Header;
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 186);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function Header(_ref) {
+	  var message = _ref.message;
+	
+	  return _react2.default.createElement(
+	    'h2',
+	    { className: 'Header' },
+	    message
+	  );
+	}
+	
+	Header.propTypes = {
+	  message: _propTypes2.default.string
+	};
+
+/***/ }),
+/* 186 */
 /*!*******************************!*\
   !*** ./~/prop-types/index.js ***!
   \*******************************/
@@ -22419,12 +22501,12 @@
 	} else {
 	  // By explicitly using `prop-types` you are opting into new production behavior.
 	  // http://fb.me/prop-types-in-prod
-	  module.exports = __webpack_require__(/*! ./factoryWithThrowingShims */ 186)();
+	  module.exports = __webpack_require__(/*! ./factoryWithThrowingShims */ 187)();
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../process/browser.js */ 3)))
 
 /***/ }),
-/* 186 */
+/* 187 */
 /*!**************************************************!*\
   !*** ./~/prop-types/factoryWithThrowingShims.js ***!
   \**************************************************/
@@ -22485,42 +22567,53 @@
 	};
 
 /***/ }),
-/* 187 */
-/*!**********************************!*\
-  !*** ./src/components/Header.js ***!
-  \**********************************/
+/* 188 */
+/*!******************************************!*\
+  !*** ./src/components/ContestPreview.js ***!
+  \******************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = Header;
+	exports.default = ContestPreview;
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _propTypes = __webpack_require__(/*! prop-types */ 185);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function Header(_ref) {
-	  var message = _ref.message;
+	function ContestPreview(_ref) {
+	  var categoryName = _ref.categoryName,
+	      contestName = _ref.contestName;
 	
 	  return _react2.default.createElement(
-	    'h2',
-	    { className: 'text-center' },
-	    message
+	    "div",
+	    { className: "ContestPreview" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "category-name" },
+	      categoryName
+	    ),
+	    _react2.default.createElement(
+	      "dir",
+	      { className: "contest-name" },
+	      contestName
+	    )
 	  );
 	}
-	
-	Header.propTypes = {
-	  message: _propTypes2.default.string
-	};
+
+/***/ }),
+/* 189 */
+/*!***************************!*\
+  !*** ./src/testData.json ***!
+  \***************************/
+/***/ (function(module, exports) {
+
+	module.exports = {"contests":[{"id":1,"categoryName":"Business/Company","contestName":"Cognitive Building Bricks"},{"id":2,"categoryName":"Magazine/Newsletter","contestName":"Educating people about sustainable food production"},{"id":3,"categoryName":"Software Component","contestName":"Big Data Analytics for Cash Circulation"},{"id":4,"categoryName":"Website","contestName":"Free programming books"}]}
 
 /***/ })
 /******/ ]);
