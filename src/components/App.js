@@ -2,21 +2,15 @@ import React from 'react';
 import Header from './Header';
 import ContestPreview from './ContestPreview';
 // import data from '../testData';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default class App extends React.Component{
   state = {
     pageHeader: 'Naming Contests',
-    contests: [],
+    contests: this.props.initialContests,
   }
   componentDidMount() {
-    axios.get('/api/contests')
-      .then(res => {
-        this.setState({
-          contests: res.data.contests,
-        });
-      })
-      .catch(err => console.error(err));
+
   }
   render() {
     return (
