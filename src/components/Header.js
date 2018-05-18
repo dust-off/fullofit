@@ -1,14 +1,15 @@
 import React from 'react';
-import propTypes from 'prop-types';
 
-export default function Header ({ message }) {
+const Header = ({ message }) => {
   return (
-    <h2 className="Header">
+    <h2 className="Header text-center">
       {message}
     </h2>
   );
-}
+};
 
 Header.propTypes = {
-  message: propTypes.string
+  message: React.PropTypes.string
 };
+
+export default Header;
