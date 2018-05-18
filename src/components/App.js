@@ -12,12 +12,7 @@ class App extends React.Component {
     initialData: React.PropTypes.object.isRequired
   };
   state = this.props.initialData;
-  componentDidMount() {
 
-  }
-  componentWillUnmount() {
-    // clean timers, listeners
-  }
   fetchContest = (contestId) => {
     pushState(
       { currentContestId: contestId },
@@ -49,8 +44,8 @@ class App extends React.Component {
     }
 
     return <ContestList
-            onContestClick={this.fetchContest}
-            contests={this.state.contests} />;
+      onContestClick={this.fetchContest}
+      contests={this.state.contests} />;
   }
   render() {
     return (
