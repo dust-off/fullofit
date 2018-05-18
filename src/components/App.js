@@ -13,11 +13,26 @@ class App extends React.Component {
   };
   state = this.props.initialData;
 
+  fetchContestList = (contestId) => {
+    pushState(
+      { currentContestId: null },
+      '/'
+    );
+
+    api.fetchContestList(contestId).then(contests => {
+      this.setState({
+        currentContestId: null,
+        contests
+      });
+    });
+  };
+
   fetchContest = (contestId) => {
     pushState(
       { currentContestId: contestId },
       `/contest/${contestId}`
     );
+
     api.fetchContest(contestId).then(contest => {
       this.setState({
         currentContestId: contest.id,
@@ -40,7 +55,10 @@ class App extends React.Component {
   }
   currentContent() {
     if (this.state.currentContestId) {
-      return <Contest {...this.currentContest()} />;
+      return <Contest
+        contestListClick={this.fetchContestList}
+        {...this.currentContest()}
+      />;
     }
 
     return <ContestList
