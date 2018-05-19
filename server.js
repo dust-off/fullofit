@@ -4,6 +4,7 @@ import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
 import serverRender from './serverRender';
 import express from 'express';
+import bodyParser from 'body-parser';
 
 const server = express();
 
@@ -11,6 +12,8 @@ server.use(sassMiddleware({
   src: path.join(__dirname, 'sass'),
   dest: path.join(__dirname, 'public')
 }));
+
+server.use(bodyParser.json());
 
 server.set('view engine', 'ejs');
 
@@ -22,7 +25,10 @@ server.get(['/', '/contest/:contestId'], (req, res) => {
         initialData
       });
     })
-    .catch(console.error);
+    .catch(err => {
+      console.error(err);
+      res.status(404).send('Bad Request');
+    });
 });
 
 server.use('/api', apiRouter);
